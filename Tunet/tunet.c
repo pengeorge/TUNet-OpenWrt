@@ -27,5 +27,6 @@
 
 int generate_http_request(char* buffer, int buffer_size, char* username, char* password_md5){
 	//TODO:
+
 	return 0;
 }

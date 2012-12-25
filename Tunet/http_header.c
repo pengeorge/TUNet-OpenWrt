@@ -13,6 +13,7 @@
 #define MAX_HTTP_HEADER_FIELD_COUNT			(200)
 #define MAX_HTTP_HEADER_FIELD_LENGTH		(300)
 
+#define POST_METHOD ("POST /cgi-bin/do_login HTTP/1.1\r\n")
 int http_header_t_init(http_header_t* header) {
 	memset(header, 0, sizeof(header));
 	header->request_field_count = 0;
@@ -61,6 +62,14 @@ int http_header_to_text(http_header_t* header, char* output, int output_size) {
 	memset(output, 0, sizeof(output));
 	int offset = 0;
 	int i;
+	switch (header->http_request_type){
+	case HTTP_REQUEST_TYPE_POST:
+		strncpy(output + offset, POST_METHOD, sizeof(POST_METHOD));
+		offset += sizeof(POST_METHOD) -1;
+		break;
+	default:
+		return -1;
+	}
 	for (i = 0; i < header->request_field_count; i++) {
 		int name_length = strnlen(header->request_field_name[i],
 				MAX_HTTP_HEADER_FIELD_LENGTH);
