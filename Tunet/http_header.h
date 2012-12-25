@@ -30,6 +30,7 @@ int http_header_t_init(http_header_t* header);
 int http_header_add_request_field(http_header_t* header, char* field_name, char* field_value);
 int http_header_set_request_type(http_header_t* header, int request_type);
 int http_header_to_text(http_header_t* header, char* output, int output_size);
-
+int http_header_add_post_field(http_header_t* header, char* field_name, char* field_value);
 int http_header_test();
+
 #endif /* HTTP_HEADER_H_ */

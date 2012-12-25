@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "http_header.h"
 #include "md5.h"
 
 int user_count;
@@ -21,7 +22,7 @@ char** password_md5;
 
 int parse_input(char* path);
 int main(int argc, char *argv[]){
-
+/*
 	if (argc < 2){
 		printf("usage: randy_tunet <configure_path>\n");
 		return 0;
@@ -29,8 +30,9 @@ int main(int argc, char *argv[]){
 	if (!parse_input(argv[1])){
 		printf("[main]: parse_input failed\n");
 		return 0;
-	}
+	}*/
 
+	http_header_test();
 	return 0;
 }
 
@@ -45,7 +47,7 @@ int main(int argc, char *argv[]){
  *
  */
 int parse_input(char* path){
-	char buf[MAX_LINE_LENGTH];
+/*	char buf[MAX_LINE_LENGTH];
 	memset(buf, 0, sizeof(buf));
 	FILE* f = fopen(path);
 	int bytes_read;
@@ -70,7 +72,7 @@ int parse_input(char* path){
 			printf("[parse_input]: cannot encode password %s to md5\n", buf);
 			return -1;
 		}
-	}
+	}*/
 	return 0;
 
 }

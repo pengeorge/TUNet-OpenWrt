@@ -26,5 +26,6 @@
 //Cookie: __utma=69804565.720270301.1354198205.1354198205.1354240374.2; __utmz=69804565.1354240374.2.2.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); tunet=zhao-hz09%0A183040
 
 int generate_http_request(char* buffer, int buffer_size, char* username, char* password_md5){
-
+	//TODO:
+	return 0;
 }
