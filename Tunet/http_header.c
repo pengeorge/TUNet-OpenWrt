@@ -18,6 +18,7 @@ int http_header_t_init(http_header_t* header) {
 	memset(header, 0, sizeof(header));
 	header->request_field_count = 0;
 	header->post_field_count = 0;
+	header->request_path = NULL;
 	header->request_field_name = malloc(
 			sizeof(char*) * MAX_HTTP_HEADER_FIELD_COUNT);
 	header->request_field_value = malloc(
@@ -27,6 +28,14 @@ int http_header_t_init(http_header_t* header) {
 	header->post_field_value = malloc(
 			sizeof(char*) * MAX_HTTP_HEADER_FIELD_COUNT);
 	header->http_request_type = HTTP_REQUEST_TYPE_ERROR;
+	return 0;
+}
+
+int http_header_set_request_path(http_header_t* header, char* request_path){
+	if (!header){
+		return -1;
+	}
+	header->request_path = strndup(request_path, MAX_HTTP_HEADER_FIELD_LENGTH);
 	return 0;
 }
 
@@ -62,14 +71,16 @@ int http_header_to_text(http_header_t* header, char* output, int output_size) {
 	memset(output, 0, sizeof(output));
 	int offset = 0;
 	int i;
-	switch (header->http_request_type){
+/*	switch (header->http_request_type){
 	case HTTP_REQUEST_TYPE_POST:
 		strncpy(output + offset, POST_METHOD, sizeof(POST_METHOD));
 		offset += sizeof(POST_METHOD) -1;
 		break;
 	default:
 		return -1;
-	}
+	}*/
+	strncpy(output + offset, header->request_path, strlen(header->request_path));
+	offset += strlen(header->request_path);
 	for (i = 0; i < header->request_field_count; i++) {
 		int name_length = strnlen(header->request_field_name[i],
 				MAX_HTTP_HEADER_FIELD_LENGTH);
@@ -115,6 +126,8 @@ int http_header_to_text(http_header_t* header, char* output, int output_size) {
 				return -1;
 			}
 		}
+		strncpy(output + offset, "\r", MAX_HTTP_HEADER_FIELD_LENGTH);
+		offset += 1;
 	}
 	return 0;
 }

@@ -8,12 +8,11 @@
 #include <stdlib.h>
 
 #include "http_header.h"
+#include "tunet.h"
 #include "md5.h"
 
-int user_count;
-char** username;
-char** password_md5;
 
+#define SUSUO b6b2a596d787b1c647cf96ca04c3fc85
 
 #define MAX_LINE_LENGTH (4096)
 #define MAX_USERNAME (10)
@@ -32,7 +31,13 @@ int main(int argc, char *argv[]){
 		return 0;
 	}*/
 
-	http_header_test();
+	//http_header_test();
+	tunet_connection_helper_t* helper =
+			(tunet_connection_helper_t*)malloc(sizeof(tunet_connection_helper_t));
+	//tunet_connection_helper_t_init(helper);
+	//tunet_login(helper);
+	//tunet_logout(helper);
+	tunet_begin();
 	return 0;
 }
 
