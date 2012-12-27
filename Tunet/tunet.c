@@ -166,15 +166,18 @@ int tunet_login(tunet_connection_helper_t* helper) {
 		printf("[tunet_login]: send login request error\n");
 		return -1;
 	}
-	while ((bytes_read = recv(sockfd, read_buffer, MAX_HTTP_REQUEST_BUFFER, 0)) >= 0) {
-		if (bytes_read > 0) {
-			printf("read bytes: %s\n", read_buffer);
-		}
-		memset(read_buffer, 0, sizeof(read_buffer));
+	struct timeval tv;
+	tv.tv_sec = 5;
+	setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv,sizeof(struct timeval));
+	bytes_read = recv(sockfd, read_buffer, MAX_HTTP_REQUEST_BUFFER, 0);
+	if (bytes_read > 0) {
+		printf("read bytes: %s\n", read_buffer);
 	}
+	memset(read_buffer, 0, sizeof(read_buffer));
+
 	printf("do not receive more data\n");
 	close(sockfd);
-	printf("[tunet_login]: login ok!");
+	printf("[tunet_login]: login ok!\n");
 	return 0;
 }
 
@@ -205,20 +208,23 @@ int tunet_logout(tunet_connection_helper_t* helper){
 		printf("[tunet_logout]: send logout request error\n");
 		return -1;
 	}
-	while ((bytes_read = recv(sockfd, read_buffer, MAX_HTTP_REQUEST_BUFFER, 0)) >= 0) {
-		if (bytes_read > 0) {
-			printf("read bytes: %s\n", read_buffer);
-		}
-		memset(read_buffer, 0, sizeof(read_buffer));
+	struct timeval tv;
+	tv.tv_sec = 5;
+	setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv,sizeof(struct timeval));
+	bytes_read = recv(sockfd, read_buffer, MAX_HTTP_REQUEST_BUFFER, 0);
+	if (bytes_read > 0) {
+		printf("read bytes: %s\n", read_buffer);
 	}
+	memset(read_buffer, 0, sizeof(read_buffer));
+
 	printf("do not receive more data\n");
 	close(sockfd);
 	printf("[tunet_logout]: logout ok!\n");
 	return 0;
 }
 
-#define CONNECTION_TIME (60)
-#define LOGOUT_WAIT_TIME (15)
+#define CONNECTION_TIME (30)
+#define LOGOUT_WAIT_TIME (25)
 int tunet_begin(){
 	tunet_connection_helper_t* helper =
 			(tunet_connection_helper_t*)malloc(sizeof(tunet_connection_helper_t));

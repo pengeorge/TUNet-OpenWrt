@@ -32,8 +32,8 @@ int main(int argc, char *argv[]){
 	}*/
 
 	//http_header_test();
-	tunet_connection_helper_t* helper =
-			(tunet_connection_helper_t*)malloc(sizeof(tunet_connection_helper_t));
+	//tunet_connection_helper_t* helper =
+	//		(tunet_connection_helper_t*)malloc(sizeof(tunet_connection_helper_t));
 	//tunet_connection_helper_t_init(helper);
 	//tunet_login(helper);
 	//tunet_logout(helper);
