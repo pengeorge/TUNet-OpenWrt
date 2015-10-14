@@ -4,6 +4,7 @@
 AC_PREREQ([2.68])
 AC_INIT(OpenWrt-TUNet, 0.1, pengeorge@gmail.com)
 AM_INIT_AUTOMAKE(OpenWrt-TUNet, 0.1)
+AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_SRCDIR([main.c])
 
 # Checks for programs.

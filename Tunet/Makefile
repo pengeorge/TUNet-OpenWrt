@@ -33,12 +33,13 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = x86_64-unknown-linux-gnu
-host_triplet = x86_64-unknown-linux-gnu
+host_triplet = mips-openwrt-linux-uclibc
 bin_PROGRAMS = tunet$(EXEEXT)
 subdir = .
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
-	$(srcdir)/Makefile.in $(top_srcdir)/configure config.guess \
-	config.sub depcomp install-sh missing
+	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
+	$(top_srcdir)/configure config.guess config.sub depcomp \
+	install-sh missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -46,6 +47,7 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
+CONFIG_HEADER = config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
@@ -87,13 +89,13 @@ AUTOCONF = ${SHELL} /home/chenzp/tunet/OpenWRT-Tunet/Tunet/missing --run autocon
 AUTOHEADER = ${SHELL} /home/chenzp/tunet/OpenWRT-Tunet/Tunet/missing --run autoheader
 AUTOMAKE = ${SHELL} /home/chenzp/tunet/OpenWRT-Tunet/Tunet/missing --run automake-1.11
 AWK = gawk
-CC = gcc
+CC = mips-openwrt-linux-uclibc-gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2
-CPP = gcc -E
+CFLAGS = -g -O2 -I/home/chenzp/openwrt/chaos_calmer/staging_dir/target-mips_34kc_uClibc-0.9.33.2/usr/include -D_GNU_SOURCE
+CPP = mips-openwrt-linux-uclibc-gcc -E
 CPPFLAGS = 
 CYGPATH_W = echo
-DEFS = -DPACKAGE_NAME=\"OpenWrt-TUNet\" -DPACKAGE_TARNAME=\"openwrt-tunet\" -DPACKAGE_VERSION=\"0.1\" -DPACKAGE_STRING=\"OpenWrt-TUNet\ 0.1\" -DPACKAGE_BUGREPORT=\"pengeorge@gmail.com\" -DPACKAGE_URL=\"\" -DPACKAGE=\"OpenWrt-TUNet\" -DVERSION=\"0.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_ARPA_INET_H=1 -DHAVE_NETINET_IN_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_SYS_SOCKET_H=1 -DHAVE_UNISTD_H=1 -DHAVE_STDLIB_H=1 -DHAVE_MALLOC=1 -D__EXTENSIONS__=1 -D_ALL_SOURCE=1 -D_GNU_SOURCE=1 -D_POSIX_PTHREAD_SEMANTICS=1 -D_TANDEM_SOURCE=1 -DHAVE_MEMSET=1 -DHAVE_SOCKET=1 -DHAVE_STRNDUP=1 -DHAVE_STRSTR=1
+DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
 ECHO_C = 
 ECHO_N = -n
@@ -106,10 +108,10 @@ INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-LDFLAGS = 
-LIBOBJS = 
+LDFLAGS = -L/home/chenzp/openwrt/chaos_calmer/staging_dir/target-mips_34kc_uClibc-0.9.33.2/usr/lib
+LIBOBJS =  ${LIBOBJDIR}malloc$U.o
 LIBS = 
-LTLIBOBJS = 
+LTLIBOBJS =  ${LIBOBJDIR}malloc$U.lo
 MAKEINFO = ${SHELL} /home/chenzp/tunet/OpenWRT-Tunet/Tunet/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
 OBJEXT = o
@@ -123,13 +125,13 @@ PACKAGE_VERSION = 0.1
 PATH_SEPARATOR = :
 SET_MAKE = 
 SHELL = /bin/bash
-STRIP = 
+STRIP = mips-openwrt-linux-uclibc-strip
 VERSION = 0.1
 abs_builddir = /home/chenzp/tunet/OpenWRT-Tunet/Tunet
 abs_srcdir = /home/chenzp/tunet/OpenWRT-Tunet/Tunet
 abs_top_builddir = /home/chenzp/tunet/OpenWRT-Tunet/Tunet
 abs_top_srcdir = /home/chenzp/tunet/OpenWRT-Tunet/Tunet
-ac_ct_CC = gcc
+ac_ct_CC = 
 am__include = include
 am__leading_dot = .
 am__quote = 
@@ -137,7 +139,7 @@ am__tar = $${TAR-tar} chof - "$$tardir"
 am__untar = $${TAR-tar} xf -
 bindir = ${exec_prefix}/bin
 build = x86_64-unknown-linux-gnu
-build_alias = 
+build_alias = x86_64-unknown-linux-gnu
 build_cpu = x86_64
 build_os = linux-gnu
 build_vendor = unknown
@@ -147,11 +149,11 @@ datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
-host = x86_64-unknown-linux-gnu
-host_alias = 
-host_cpu = x86_64
-host_os = linux-gnu
-host_vendor = unknown
+host = mips-openwrt-linux-uclibc
+host_alias = mips-openwrt-linux-uclibc
+host_cpu = mips
+host_os = linux-uclibc
+host_vendor = openwrt
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
@@ -176,9 +178,11 @@ top_build_prefix =
 top_builddir = .
 top_srcdir = .
 AUTOMAKE_OPTIONS = foreign
+LD = mips-openwrt-linux-uclibc-ld
 tunet_SOURCES = http_header.c http_header.h main.c md5.h tunet.c tunet.h md5.c
 tunet_LDADD = 
-all: all-am
+all: config.h
+	$(MAKE) $(AM_MAKEFLAGS) all-am
 
 .SUFFIXES:
 .SUFFIXES: .c .o .obj
@@ -216,6 +220,21 @@ $(top_srcdir)/configure:  $(am__configure_deps)
 $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	$(am__cd) $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
 $(am__aclocal_m4_deps):
+
+config.h: stamp-h1
+	@if test ! -f $@; then rm -f stamp-h1; else :; fi
+	@if test ! -f $@; then $(MAKE) $(AM_MAKEFLAGS) stamp-h1; else :; fi
+
+stamp-h1: $(srcdir)/config.h.in $(top_builddir)/config.status
+	@rm -f stamp-h1
+	cd $(top_builddir) && $(SHELL) ./config.status config.h
+$(srcdir)/config.h.in:  $(am__configure_deps) 
+	($(am__cd) $(top_srcdir) && $(AUTOHEADER))
+	rm -f stamp-h1
+	touch $@
+
+distclean-hdr:
+	-rm -f config.h stamp-h1
 install-binPROGRAMS: $(bin_PROGRAMS)
 	@$(NORMAL_INSTALL)
 	test -z "$(bindir)" || $(MKDIR_P) "$(DESTDIR)$(bindir)"
@@ -292,11 +311,11 @@ ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	mkid -fID $$unique
 tags: TAGS
 
-TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
+TAGS:  $(HEADERS) $(SOURCES) config.h.in $(TAGS_DEPENDENCIES) \
 		$(TAGS_FILES) $(LISP)
 	set x; \
 	here=`pwd`; \
-	list='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
+	list='$(SOURCES) $(HEADERS) config.h.in $(LISP) $(TAGS_FILES)'; \
 	unique=`for i in $$list; do \
 	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
 	  done | \
@@ -314,9 +333,9 @@ TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 	  fi; \
 	fi
 ctags: CTAGS
-CTAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
+CTAGS:  $(HEADERS) $(SOURCES) config.h.in $(TAGS_DEPENDENCIES) \
 		$(TAGS_FILES) $(LISP)
-	list='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
+	list='$(SOURCES) $(HEADERS) config.h.in $(LISP) $(TAGS_FILES)'; \
 	unique=`for i in $$list; do \
 	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
 	  done | \
@@ -498,7 +517,7 @@ distcleancheck: distclean
 	       exit 1; } >&2
 check-am: all-am
 check: check-am
-all-am: Makefile $(PROGRAMS)
+all-am: Makefile $(PROGRAMS) config.h
 installdirs:
 	for dir in "$(DESTDIR)$(bindir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
@@ -542,7 +561,7 @@ distclean: distclean-am
 	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
-	distclean-tags
+	distclean-hdr distclean-tags
 
 dvi: dvi-am
 
@@ -605,15 +624,15 @@ ps-am:
 
 uninstall-am: uninstall-binPROGRAMS
 
-.MAKE: install-am install-strip
+.MAKE: all install-am install-strip
 
 .PHONY: CTAGS GTAGS all all-am am--refresh check check-am clean \
 	clean-binPROGRAMS clean-generic ctags dist dist-all dist-bzip2 \
 	dist-gzip dist-lzip dist-lzma dist-shar dist-tarZ dist-xz \
 	dist-zip distcheck distclean distclean-compile \
-	distclean-generic distclean-tags distcleancheck distdir \
-	distuninstallcheck dvi dvi-am html html-am info info-am \
-	install install-am install-binPROGRAMS install-data \
+	distclean-generic distclean-hdr distclean-tags distcleancheck \
+	distdir distuninstallcheck dvi dvi-am html html-am info \
+	info-am install install-am install-binPROGRAMS install-data \
 	install-data-am install-dvi install-dvi-am install-exec \
 	install-exec-am install-html install-html-am install-info \
 	install-info-am install-man install-pdf install-pdf-am \
