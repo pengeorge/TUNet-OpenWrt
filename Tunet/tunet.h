@@ -31,7 +31,10 @@ typedef struct tunet_connection_helper_s{
     Mode mode;
 } tunet_connection_helper_t;
 
-int tunet_connection_helper_t_init(tunet_connection_helper_t* helper);
+void encode_password(char *dst, char *src);
+
+int tunet_connection_helper_t_init(tunet_connection_helper_t* helper, char *username, char *password);
+
 /**
  * begin tunet process. login and wait for a period of time and then log out
  * and change an account to do the things again

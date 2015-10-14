@@ -22,13 +22,25 @@
 #include <stdlib.h>
 #define MAX_HTTP_REQUEST_BUFFER (2000)
 
-int tunet_connection_helper_t_init(tunet_connection_helper_t* helper){
+void encode_password(char *dst, char *src) {
+    char md5_buf[MD5_LENGTH];
+    md5_encode(src, md5_buf);
+    strcpy(dst, "{MD5_HEX}");
+    strcat(dst, md5_buf);
+}
+
+int tunet_connection_helper_t_init(tunet_connection_helper_t* helper, char *username, char *password){
 	helper->sockfd = 0;
 	helper->current_account_index = 0;
     helper->user_count = 0;
 	memset(&helper->servaddr, 0, sizeof(helper->servaddr));
 	helper->servaddr.sin_family = AF_INET;
 	helper->servaddr.sin_port = htons(SERVER_PORT);
+    if (username && password) {
+        helper->user_count = 1;
+        strcpy(helper->usernames[0], username);
+        encode_password(helper->password_md5s[0], password);
+    }
 	return 0;
 }
 
