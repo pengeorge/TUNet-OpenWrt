@@ -22,10 +22,6 @@
 #include <stdlib.h>
 #define MAX_HTTP_REQUEST_BUFFER (2000)
 
-// Default server ip and port
-#define SERVER_IP ("166.111.204.120")
-#define SERVER_PORT (80)
-
 int tunet_connection_helper_t_init(tunet_connection_helper_t* helper){
 	helper->sockfd = 0;
 	helper->current_account_index = 0;
@@ -33,7 +29,6 @@ int tunet_connection_helper_t_init(tunet_connection_helper_t* helper){
 	memset(&helper->servaddr, 0, sizeof(helper->servaddr));
 	helper->servaddr.sin_family = AF_INET;
 	helper->servaddr.sin_port = htons(SERVER_PORT);
-	inet_pton(AF_INET, SERVER_IP, &helper->servaddr.sin_addr);
 	return 0;
 }
 
@@ -303,10 +298,10 @@ int do_tunet_getinfo(tunet_connection_helper_t* helper){
     int res = tunet_do_request(&helper->servaddr, header_buffer, &text, "info");
     if (res <= 0) return -1;
     char *tmp_text = strstr(text, "\r\n");
-    if (tmp_text == NULL) {
-        printf("[tunet_info]: probabliy unrecognized response body:---\n%s\n---\n", text);
-    } else {
+    if (tmp_text) {
         text = tmp_text + 2;
+    } else {
+        //printf("[tunet_info]: probably unknown response body:---\n%s\n---\n", text);
     }
     char *p;
     printf("[username] %s\n", strtok(text, ","));

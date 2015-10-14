@@ -16,6 +16,10 @@
 #define MAX_NAME_LENGTH (64)
 #define MD5_LENGTH (32)
 
+// Default server ip and port
+#define SERVER_IP ("166.111.204.120")
+#define SERVER_PORT (80)
+
 typedef enum{NORMAL} Mode;
 typedef struct tunet_connection_helper_s{
 	int sockfd;

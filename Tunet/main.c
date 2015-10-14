@@ -17,11 +17,13 @@
 #define MAX_USERNAME (10)
 #define MAX_PASSWORD (64)
 
-#define DEFAULT_CONFIG ("/etc/tunet/tunet.conf")
+#define DEFAULT_CONFIG "/etc/tunet/tunet.conf"
 #define USAGE \
     ("Usage: tunet [options] <login|logout|info|status>\n" \
-     "       -c: the configuration file, default: %s\n" \
+     "       -c: the configuration file, default: " DEFAULT_CONFIG "\n" \
      "       config example:\n" \
+     "         host_ip = 166.111.204.120 # optional\n" \
+     "         port = 80 # optional\n" \
      "         username = myname15\n" \
      "         password = 123456\n" )
 
@@ -29,11 +31,11 @@ int parse_options(int argc, char *argv[], char **p_config_file);
 int parse_config_file(char *config_file, tunet_connection_helper_t *helper);
 
 int main(int argc, char *argv[]){
-    char usage[MAX_LINE_LENGTH];
-    sprintf(usage, USAGE, DEFAULT_CONFIG);
+    //char usage[MAX_LINE_LENGTH];
+    //sprintf(usage, USAGE, DEFAULT_CONFIG);
     char *config_file;
     if (parse_options(argc, argv, &config_file)) {
-        printf("%s\n", usage);
+        printf(USAGE);
         return -1;
     }
 	tunet_connection_helper_t* helper =
@@ -45,7 +47,8 @@ int main(int argc, char *argv[]){
 
     char *action = argv[argc - 1];
     if (tunet_do(helper, action)) {
-        printf("%s\n", usage);
+        printf(USAGE);
+        //printf("%s\n", usage);
     }
 	return 0;
 }
@@ -118,6 +121,7 @@ int parse_config_file(char *config_file, tunet_connection_helper_t *helper) {
     char *line = buf;
     int waiting_for_password = 0;
     char no_passwd_hint[] = "Configuration error: no password for user %s\n";
+    int host_converted = 0;
     while (fgets(line, MAX_LINE_LENGTH, fp)) {
         int len = strlen(line) - 1;
         line[len] = '\0';
@@ -136,9 +140,11 @@ int parse_config_file(char *config_file, tunet_connection_helper_t *helper) {
         char *val = sep + 1;
         trim(&key);
         trim(&val);
-        if (strcmp(key, "server_ip") == 0) {
-            inet_pton(AF_INET, val, &helper->servaddr.sin_addr);
-        } else if (strcmp(key, "server_port") == 0) {
+        if (strcmp(key, "host_ip") == 0) {
+            if (inet_pton(AF_INET, val, &helper->servaddr.sin_addr) != 1) {
+                printf("ERROR cannot convert server address: %s, try default: %s\n", val, SERVER_IP);
+            }
+        } else if (strcmp(key, "port") == 0) {
             helper->servaddr.sin_port = htons(atoi(val));
         } else if (strcmp(key, "username") == 0) {
             if (helper->user_count >= MAX_USER_COUNT) {
@@ -166,9 +172,17 @@ int parse_config_file(char *config_file, tunet_connection_helper_t *helper) {
             } else {
                 printf("WARNING unsupported working mode \"%s\", reset as \"normal\"\n", val);
             }
+        } else {
+            printf("WARNING unknown key: %s\n", key);
         }
     }
     fclose(fp);
+    if (!host_converted) {
+        if (inet_pton(AF_INET, SERVER_IP, &helper->servaddr.sin_addr) != 1) {
+            printf("ERROR cannot convert server address: %s.\n", SERVER_IP);
+            return -1;
+        }
+    }
     return 0;
 }
 
