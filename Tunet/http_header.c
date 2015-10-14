@@ -100,10 +100,10 @@ int http_header_to_text(http_header_t* header, char* output, int output_size) {
 			return -1;
 		}
 	}
+    strncpy(output + offset, "\r\n", MAX_HTTP_HEADER_FIELD_LENGTH);
 
 	//append POST data here
 	if (HTTP_REQUEST_TYPE_POST == header->http_request_type) {
-		strncpy(output + offset, "\r\n", MAX_HTTP_HEADER_FIELD_LENGTH);
 		offset += 2;
 		for (i = 0; i < header->post_field_count; i++) {
 			if (i != 0) {
