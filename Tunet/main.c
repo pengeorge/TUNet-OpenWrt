@@ -21,7 +21,9 @@
 #define USAGE \
     ("Usage: tunet [options] <login|logout|info|status>\n" \
      "       -c: the configuration file, default: " DEFAULT_CONFIG "\n" \
-     "       config example:\n" \
+     "       -uUSERNAME: set username as USERNAME\n" \
+     "       -pPASSWORD: set password as PASSWORD\n\n" \
+     "       config file example:\n" \
      "         host_ip = 166.111.204.120 # optional\n" \
      "         port = 80 # optional\n" \
      "         username = myname15\n" \
