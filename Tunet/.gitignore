@@ -5,7 +5,6 @@ tunet
 aclocal.m4
 autom4te.cache
 autoscan.log
-config.guess
 config.log
 config.status
 config.sub
