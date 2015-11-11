@@ -33,7 +33,7 @@ install:
   - mkdir package/$PACKAGE
   - ln -s $TRAVIS_BUILD_DIR/Makefile package/$PACKAGE/
   - ln -s $TRAVIS_BUILD_DIR/src package/$PACKAGE/
-  - export PATH=$PATH:$TRAVIS_BUILD_DIR/sdk/$(basename $SDK_URL)
+  - export PATH=$PATH:$TRAVIS_BUILD_DIR/sdk/${$(basename $SDK_URL)%.tar.bz2}
 
 script:
   - export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$PATH
