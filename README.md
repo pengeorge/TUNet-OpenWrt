@@ -1,17 +1,23 @@
 Branch master (for OpenWRT)
-[![Build Status](https://travis-ci.org/pengeorge/OpenWRT-Tunet.svg?branch=master)]
-(https://travis-ci.org/pengeorge/OpenWRT-Tunet)
 ###########
 
+[![Build Status](https://travis-ci.org/pengeorge/OpenWRT-Tunet.svg?branch=master)]
+(https://travis-ci.org/pengeorge/OpenWRT-Tunet)
+
 Branch ubuntu12.04amd64
+###########
+
 [![Build Status](https://travis-ci.org/pengeorge/OpenWRT-Tunet.svg?branch=ubuntu12.04amd64)]
 (https://travis-ci.org/pengeorge/OpenWRT-Tunet)
-###########
 
 OpenWRT-Tunet
 =============
 
 Tunet program for OpenWRT
+
+Installation
+------------
+See .travis.yml
 
 Usage
 -----
