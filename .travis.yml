@@ -49,5 +49,5 @@ script:
   - ./scripts/feeds install libpthread
   - make clean
   - make V=s
-  - file $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/tunet
+  - file `find . -name tunet`
 
