@@ -10,7 +10,6 @@ config.log
 config.status
 config.sub
 depcomp
-install-sh
 stamp-h1
 Makefile.in
 missing
