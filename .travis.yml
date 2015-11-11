@@ -31,22 +31,25 @@ install:
   - export FILE=$TRAVIS_BUILD_DIR/cache/$(basename $SDK_URL)
   - file $FILE
   - tar xjf $FILE
-  - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*
-  - mkdir package/$PACKAGE
-  - pushd $TRAVIS_BUILD_DIR/Tunet
-  - ./autogen-cross-compile.sh
-  - popd
-  - ln -s $TRAVIS_BUILD_DIR/Tunet/Makefile package/$PACKAGE/
-  - ln -s $TRAVIS_BUILD_DIR/Tunet package/$PACKAGE/src
-  - export url_base=$(basename $SDK_URL)
-  - export PATH=$PATH:$TRAVIS_BUILD_DIR/sdk/${url_base%.tar.bz2}
+  - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/toolchain-*/bin
+  - export PATH=$PATH:$PWD
+  - export STAGING_DIR=$PWD
+  - cd ../../host/bin
+  - export PATH=$PATH:$PWD
+#  - mkdir package/$PACKAGE
+#  - ln -s $TRAVIS_BUILD_DIR/Tunet/Makefile package/$PACKAGE/
+#  - ln -s $TRAVIS_BUILD_DIR/Tunet package/$PACKAGE/src
+#  - export url_base=$(basename $SDK_URL)
+#  - export PATH=$PATH:$TRAVIS_BUILD_DIR/sdk/${url_base%.tar.bz2}
 
 script:
-  - export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$PATH
-  - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*
-  - ./scripts/feeds update packages >/dev/null
-  - ./scripts/feeds install libpthread
+  - cd $TRAVIS_BUILD_DIR/Tunet
+  - ./autogen-cross-compile.sh
+#  - export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$PATH
+#  - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*
+#  - ./scripts/feeds update packages >/dev/null
+#  - ./scripts/feeds install libpthread
   - make clean
   - make V=s
-  - file `find . -name tunet`
+  - file tunet
 
