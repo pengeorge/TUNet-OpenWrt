@@ -19,6 +19,8 @@ env:
   matrix:
     - SDK_URL=https://downloads.openwrt.org/chaos_calmer/15.05/ar71xx/generic/OpenWrt-SDK-15.05-ar71xx-generic_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2
     - SDK_URL=https://downloads.openwrt.org/chaos_calmer/15.05/kirkwood/generic/OpenWrt-SDK-15.05-kirkwood_gcc-4.8-linaro_uClibc-0.9.33.2_eabi.Linux-x86_64.tar.bz2
+    - SDK_URL=https://downloads.openwrt.org/chaos_calmer/15.05/lantiq/xway/OpenWrt-SDK-15.05-lantiq-xway_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2
+    - SDK_URL=https://downloads.openwrt.org/chaos_calmer/15.05/ramips/rt305x/OpenWrt-SDK-15.05-ramips-rt305x_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2
 
 install:
   - mkdir -p $TRAVIS_BUILD_DIR/local ; cd $TRAVIS_BUILD_DIR/local
@@ -47,5 +49,5 @@ script:
   - ./scripts/feeds install libpthread
   - make clean
   - make V=s
-  - file $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/package/$PACKAGE/tunet
+  - file $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/tunet
 
