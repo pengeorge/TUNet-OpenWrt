@@ -16,7 +16,6 @@ branches:
 before_script:
   - git clone git://git.openwrt.org/15.05/openwrt.git
   - cd openwrt 
-  - make menuconfig
   - make
   - export PATH=$PATH:$PWD/staging_dir/host/bin:$PWD/staging_dir/toolchain-mips_34kc_gcc-4.8-linaro_uClibc-0.9.33.2/bin
 
