@@ -1,0 +1,22 @@
+language: c
+
+os:
+  - linux
+
+addons:
+  apt:
+    packages:
+      - gcc-4.6
+
+branches:
+  only:
+    - master
+    - ubuntu12.04amd64
+
+script:
+  - cd Tunet
+  - ./configure
+  - make
+
+
+
