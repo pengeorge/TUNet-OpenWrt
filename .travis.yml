@@ -15,6 +15,7 @@ branches:
 
 script:
   - cd Tunet
+  - ./autogen-local-compile.sh
   - ./configure
   - make
 
