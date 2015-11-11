@@ -10,7 +10,6 @@ addons:
 
 branches:
   only:
-    - master
     - ubuntu12.04amd64
 
 script:

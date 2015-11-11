@@ -1,9 +1,3 @@
-Branch master (for OpenWRT)
-###########
-
-[![Build Status](https://travis-ci.org/pengeorge/OpenWRT-Tunet.svg?branch=master)]
-(https://travis-ci.org/pengeorge/OpenWRT-Tunet)
-
 Branch ubuntu12.04amd64
 ###########
 
