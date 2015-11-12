@@ -16,10 +16,10 @@ env:
   global:
     - PACKAGE=tunet
   matrix:
-    - SDK_URL=https://downloads.openwrt.org/chaos_calmer/15.05/ar71xx/generic/OpenWrt-SDK-15.05-ar71xx-generic_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2
-    - SDK_URL=https://downloads.openwrt.org/chaos_calmer/15.05/kirkwood/generic/OpenWrt-SDK-15.05-kirkwood_gcc-4.8-linaro_uClibc-0.9.33.2_eabi.Linux-x86_64.tar.bz2
-    - SDK_URL=https://downloads.openwrt.org/chaos_calmer/15.05/lantiq/xway/OpenWrt-SDK-15.05-lantiq-xway_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2
-    - SDK_URL=https://downloads.openwrt.org/chaos_calmer/15.05/ramips/rt305x/OpenWrt-SDK-15.05-ramips-rt305x_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2
+    - SDK_URL=https://downloads.openwrt.org/chaos_calmer/15.05/ar71xx/generic/OpenWrt-SDK-15.05-ar71xx-generic_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2,ARCH=mips
+    - SDK_URL=https://downloads.openwrt.org/chaos_calmer/15.05/kirkwood/generic/OpenWrt-SDK-15.05-kirkwood_gcc-4.8-linaro_uClibc-0.9.33.2_eabi.Linux-x86_64.tar.bz2,ARCH=arm
+    - SDK_URL=https://downloads.openwrt.org/chaos_calmer/15.05/lantiq/xway/OpenWrt-SDK-15.05-lantiq-xway_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2,ARCH=mips
+    - SDK_URL=https://downloads.openwrt.org/chaos_calmer/15.05/ramips/rt305x/OpenWrt-SDK-15.05-ramips-rt305x_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2,ARCH=mipsel
 
 install:
   - mkdir -p $TRAVIS_BUILD_DIR/local ; cd $TRAVIS_BUILD_DIR/local
@@ -31,11 +31,8 @@ install:
   - export FILE=$TRAVIS_BUILD_DIR/cache/$(basename $SDK_URL)
   - file $FILE
   - tar xjf $FILE
-  - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/toolchain-*/bin
-  - export PATH=$PATH:$PWD
-  - export STAGING_DIR=$PWD
-  - cd ../../host/bin
-  - export PATH=$PATH:$PWD
+  - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*
+  - export SDK_DIR=$PWD
 #  - mkdir package/$PACKAGE
 #  - ln -s $TRAVIS_BUILD_DIR/Tunet/Makefile package/$PACKAGE/
 #  - ln -s $TRAVIS_BUILD_DIR/Tunet package/$PACKAGE/src
@@ -44,7 +41,7 @@ install:
 
 script:
   - cd $TRAVIS_BUILD_DIR/Tunet
-  - ./autogen-cross-compile.sh
+  - ./rebuild-cross-compile.sh $SDK_DIR
 #  - export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$PATH
 #  - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*
 #  - ./scripts/feeds update packages >/dev/null

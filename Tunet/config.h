@@ -54,7 +54,7 @@
 #define HAVE_UNISTD_H 1
 
 /* Name of package */
-#define PACKAGE "OpenWrt-TUNet"
+#define PACKAGE "openwrt-tunet"
 
 /* Define to the address where bug reports for this package should be sent. */
 #define PACKAGE_BUGREPORT "pengeorge@gmail.com"
