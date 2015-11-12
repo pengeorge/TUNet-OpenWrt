@@ -43,11 +43,9 @@ script:
   - cd $TRAVIS_BUILD_DIR/Tunet
   - ./autogen-cross-compile.sh
   - ./rebuild-cross-compile.sh $SDK_DIR
+  - file tunet
 #  - export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$PATH
 #  - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*
 #  - ./scripts/feeds update packages >/dev/null
 #  - ./scripts/feeds install libpthread
-  - make clean
-  - make V=s
-  - file tunet
 
