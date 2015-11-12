@@ -11,7 +11,7 @@ Tunet program for OpenWRT
 
 Installation
 ------------
-See .travis.yml
+./configure `<`OpenWrt-SDK-directory`>`
 
 Usage
 -----

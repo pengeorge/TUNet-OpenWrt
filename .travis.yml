@@ -41,6 +41,7 @@ install:
 
 script:
   - cd $TRAVIS_BUILD_DIR/Tunet
+  - ./autogen-cross-compile.sh
   - ./rebuild-cross-compile.sh $SDK_DIR
 #  - export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$PATH
 #  - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*
