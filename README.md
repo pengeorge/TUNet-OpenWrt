@@ -11,7 +11,11 @@ Tunet program for OpenWRT
 
 Installation
 ------------
-./configure `<`OpenWrt-SDK-directory`>`
+
+```shell
+cd Tunet
+./rebuild-cross-compile.sh <OpenWrt-SDK-directory>
+```
 
 Usage
 -----

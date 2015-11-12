@@ -1,0 +1,3 @@
+cd Tunet
+./rebuild-cross-compile.sh <OpenWrt-SDK-directory>
+
