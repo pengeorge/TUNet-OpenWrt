@@ -1,13 +1,13 @@
-Branch master (for OpenWRT)
+Branch master (for OpenWrt)
 ###########
 
-[![Build Status](https://travis-ci.org/pengeorge/OpenWRT-Tunet.svg?branch=master)]
-(https://travis-ci.org/pengeorge/OpenWRT-Tunet)
+[![Build Status](https://travis-ci.org/pengeorge/TUNet-OpenWrt.svg?branch=master)]
+(https://travis-ci.org/pengeorge/TUNet-OpenWrt)
 
 OpenWRT-Tunet
 =============
 
-Tunet program for OpenWRT
+Tunet program for OpenWrt
 
 Installation
 ------------
