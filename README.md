@@ -1,17 +1,18 @@
-Branch ubuntu12.04amd64
-###########
+[![Build Status](https://travis-ci.org/pengeorge/TUNet-OpenWrt.svg?branch=ubuntu12.04amd64)]
+(https://travis-ci.org/pengeorge/TUNet-OpenWrt)
 
-[![Build Status](https://travis-ci.org/pengeorge/OpenWRT-Tunet.svg?branch=ubuntu12.04amd64)]
-(https://travis-ci.org/pengeorge/OpenWRT-Tunet)
-
-OpenWRT-Tunet
+TUNet-OpenWrt
 =============
 
-Tunet program for OpenWRT
+TUNet program for OpenWrt
 
 Installation
 ------------
-See .travis.yml
+
+```shell
+./configure
+make
+```
 
 Usage
 -----
