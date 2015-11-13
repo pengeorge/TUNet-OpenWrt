@@ -36,12 +36,8 @@ install:
 #  - mkdir package/$PACKAGE
 #  - ln -s $TRAVIS_BUILD_DIR/Tunet/Makefile package/$PACKAGE/
 #  - ln -s $TRAVIS_BUILD_DIR/Tunet package/$PACKAGE/src
-#  - export url_base=$(basename $SDK_URL)
-#  - export PATH=$PATH:$TRAVIS_BUILD_DIR/sdk/${url_base%.tar.bz2}
 
 script:
-  - cd $TRAVIS_BUILD_DIR/Tunet
-  - ./autogen-cross-compile.sh
   - ./rebuild-cross-compile.sh $SDK_DIR
   - file tunet
 #  - export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$PATH

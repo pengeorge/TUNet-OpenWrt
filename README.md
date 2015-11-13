@@ -1,10 +1,7 @@
-Branch master (for OpenWrt)
-###########
-
 [![Build Status](https://travis-ci.org/pengeorge/TUNet-OpenWrt.svg?branch=master)]
 (https://travis-ci.org/pengeorge/TUNet-OpenWrt)
 
-OpenWRT-Tunet
+TUNet-OpenWrt
 =============
 
 Tunet program for OpenWrt
@@ -13,8 +10,6 @@ Installation
 ------------
 
 ```shell
-cd Tunet
-./autogen-cross-compile.sh
 ./rebuild-cross-compile.sh <OpenWrt-SDK-directory>
 ```
 
