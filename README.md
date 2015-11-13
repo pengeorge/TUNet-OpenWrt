@@ -14,6 +14,7 @@ Installation
 
 ```shell
 cd Tunet
+./autogen-cross-compile.sh
 ./rebuild-cross-compile.sh <OpenWrt-SDK-directory>
 ```
 
