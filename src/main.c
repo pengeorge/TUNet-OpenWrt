@@ -45,9 +45,9 @@ int main(int argc, char *argv[]){
         printf(USAGE);
         return -1;
     }
-	tunet_connection_helper_t* helper =
+    tunet_connection_helper_t* helper =
 			(tunet_connection_helper_t*)malloc(sizeof(tunet_connection_helper_t));
-	tunet_connection_helper_t_init(helper, opts.username, opts.password);
+    tunet_connection_helper_t_init(helper, opts.username, opts.password);
     if (parse_config_file(&opts, helper)) {
         return -1;
     }
@@ -95,11 +95,13 @@ int parse_options(int argc, char *argv[], struct Opts *opts) {
             }
         }
     }
-    if (!opts->config_file && !(opts->username && opts->password)) {
-        opts->config_file = DEFAULT_CONFIG;
-    }
-    if (opts->config_file) {
-        printf("[tunet] Using configuration file %s\n", opts->config_file);
+    if (strcmp(argv[argc-1], "login") == 0) {
+      if (!opts->config_file && !(opts->username && opts->password)) {
+          opts->config_file = DEFAULT_CONFIG;
+      }
+      if (opts->config_file) {
+          printf("[tunet] Using configuration file %s\n", opts->config_file);
+      }
     }
     return 0;
 }

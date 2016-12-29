@@ -254,14 +254,14 @@ int do_tunet_login(tunet_connection_helper_t* helper) {
 		printf("[tunet_login]: generate http request error\n");
 		return -1;
 	}
-    char* text = read_buffer;
-    int res = tunet_do_request(&helper->servaddr, header_buffer, &text, "login");
-    if (res <= 0) return -1;
-    if (strstr(text, "Login is successful")) { // success
-        do_tunet_getinfo(helper);
-    }
-    printf("[tunet_login]: %s\n", text);
-    return 0;        
+  char* text = read_buffer;
+  int res = tunet_do_request(&helper->servaddr, header_buffer, &text, "login");
+  if (res <= 0) return -1;
+  if (strstr(text, "Login is successful")) { // success
+      do_tunet_getinfo(helper);
+  }
+  printf("[tunet_login]: %s\n", text);
+  return 0;        
 }
 
 int tunet_login(tunet_connection_helper_t* helper) {
@@ -272,7 +272,8 @@ int tunet_login(tunet_connection_helper_t* helper) {
 }
 
 int do_tunet_logout(tunet_connection_helper_t* helper){
-	printf("[tunet_logout]: logout user %s\n", helper->usernames[helper->current_account_index]);
+	//printf("[tunet_logout]: logout user %s\n", helper->usernames[helper->current_account_index]);
+	printf("[tunet_logout]: logout\n");
 	char header_buffer[MAX_HTTP_REQUEST_BUFFER];
 	char read_buffer[MAX_HTTP_REQUEST_BUFFER];
 	memset(header_buffer, 0, sizeof(header_buffer));
